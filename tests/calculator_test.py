@@ -19,8 +19,36 @@ def run_calculator_with_input(monkeypatch, inputs):
 
     return capture_output.getvalue()
 
+# Positive tests
+
 def test_addition(monkeypatch):
     """Testing addition for calculator"""
     inputs = ["addition 1 1", "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
     assert "addition result: 2.0" in output
+
+def test_subtraction(monkeypatch):
+    """Testing subtraction for calculator"""
+    inputs = ["subtraction 1 1", "quit"]
+    output = run_calculator_with_input(monkeypatch, inputs)
+    assert "subtraction result: 0.0" in output
+
+def test_multiplication(monkeypatch):
+    """Testing multiplication for calculator"""
+    inputs = ["multiplication 1 1", "quit"]
+    output = run_calculator_with_input(monkeypatch, inputs)
+    assert "multiplication result: 1.0" in output
+
+def test_division(monkeypatch):
+    """Testing division for calculator"""
+    inputs = ["division 1 1", "quit"]
+    output = run_calculator_with_input(monkeypatch, inputs)
+    assert "division result: 1.0" in output
+
+#Negative Results
+
+def test_invalid_operation(monkeypatch):
+    """Test invalid input for operation"""
+    inputs = ["modulus 5 3", "quit"]
+    output = run_calculator_with_input(monkeypatch, inputs)
+    assert "Not a valid operation: modulus. Input in the following format: <operation> <number 1> <number 2>" in output
