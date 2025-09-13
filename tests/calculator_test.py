@@ -52,3 +52,9 @@ def test_invalid_operation(monkeypatch):
     inputs = ["modulus 5 3", "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
     assert "Not a valid operation: modulus. Input in the following format: <operation> <number 1> <number 2>" in output
+
+def test_divide_by_zero(monkeypatch):
+    """Test for invalid divide by zero"""
+    inputs = ["division 1 0", "quit"]
+    output = run_calculator_with_input(monkeypatch, inputs)
+    assert "Division by zero is not allowed!" in output
