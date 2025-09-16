@@ -1,4 +1,4 @@
-from app.operations import add, subtract, multiply, divide
+from app.operations import Operations
 # from calculator import add, subtract, multiply, divide
 
 def calculator():
@@ -21,13 +21,13 @@ def calculator():
 
         try:
             if operation == "addition":
-                result = add(num1, num2)
+                result = Operations.add(num1, num2)
             elif operation == "subtraction":
-                result = subtract(num1, num2)
+                result = Operations.subtract(num1, num2)
             elif operation == "multiplication":
-                result = multiply(num1, num2)
+                result = Operations.multiply(num1, num2)
             elif operation == "division":
-                result = divide(num1, num2)
+                result = Operations.divide(num1, num2)
             else:
                 print(f"Not a valid operation: {operation}. Input in the following format: <operation> <number 1> <number 2>")
                 continue
