@@ -47,8 +47,14 @@ def test_division(monkeypatch):
 
 #Negative Results
 
+def test_invalid_inputs(monkeypatch):
+    """Test an invalid amount of inputs"""
+    inputs = ["add 1 1 1", "quit"]
+    outputs = run_calculator_with_input(monkeypatch, inputs)
+    assert "Input is not valid. Input in the following format: <operation> <number 1> <number 2>"
+
 def test_invalid_operation(monkeypatch):
-    """Test invalid input for operation"""
+    """Test invalid input for an  operation"""
     inputs = ["modulus 5 3", "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
     assert "Not a valid operation: modulus. Input in the following format: <operation> <number 1> <number 2>" in output
