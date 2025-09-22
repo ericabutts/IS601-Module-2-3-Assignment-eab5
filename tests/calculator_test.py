@@ -1,7 +1,7 @@
 import sys
 from io import StringIO
 import contextlib
-from app.calculator import calculator  # adjust import if needed
+from app.calculator import calculator, CalculationFactory, Calculation  # adjust import if needed
 import pytest
 
 def run_calculator_with_input(monkeypatch, inputs):
@@ -19,6 +19,29 @@ def run_calculator_with_input(monkeypatch, inputs):
         calculator()
 
     return capture_output.getvalue()
+
+# Test creation of Calculator for full coverage
+
+@pytest.mark.parametrize("a, b, op_name, expected", [
+    (2, 3, "addition", 5),
+    (10, 4, "subtraction", 6),
+    (3, 5, "multiplication", 15),
+    (8, 2, "division", 4),
+])
+def test_create_calculator_valid(a, b, op_name, expected):
+    calc = CalculationFactory.create_calculator(a, b, op_name)
+    assert isinstance(calc, Calculation)
+    assert calc.get_result() == expected
+
+@pytest.mark.parametrize("a, b, op_name", [
+    (2, 3, "modulus"),
+    (1, 1, "power"),
+    (5, 2, "sqrt"),
+])
+def test_create_calculator_invalid(a, b, op_name):
+    with pytest.raises(ValueError) as excinfo:
+        CalculationFactory.create_calculator(a, b, op_name)
+    assert f"Not a valid operation: {op_name}" in str(excinfo.value)
 
 # Positive tests
 
