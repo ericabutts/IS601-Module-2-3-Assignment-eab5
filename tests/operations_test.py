@@ -1,53 +1,43 @@
 import pytest
 from app.operations import Operations
 
-def test_addition_positive():
+@pytest.mark.parametrize("a, b, expected", [
+    (1,2,3),
+    (4,5,6)
+])
+def test_addition_positive(a, b, expected):
     """Positive tests for addition"""
-    assert Operations.add(1,2) == 3
-    assert Operations.add(1,3) == 4
-    assert Operations.add(1,4) == 5
+    assert Operations.add(a,b) == expected
 
-# def test_addition_negative():
-#     """Negative tests for addition"""
-#     assert add(1,2) == 0
-#     assert add(1,3) == 0
-#     assert add(1,4) == 0
+@pytest.mark.parametrize("a, b, expected", [
+    (1,1,0),
+    (1,2,-1),
+    (1,3,-2),
+])
 
-def test_subtraction_positive():
+def test_subtraction_positive(a, b, expected):
     """Positive tests for subtraction"""
-    assert Operations.subtract(1,1) == 0
-    assert Operations.subtract(1,2) == -1
-    assert Operations.subtract(1,3) == -2
+    assert Operations.subtract(a,b) == expected
 
-# def test_subtraction_negative():
-#     """Negative tests for subtraction"""
-#     assert subtract(1,1) == 1
-#     assert subtract(1,2) == 1
-#     assert subtract(1,3) == 1
+@pytest.mark.parametrize("a, b, expected", [
+    (1,1,1),
+    (2,1,2),
+    (3,1,3)
+])
 
-def test_multiplication_positive():
+def test_multiplication_positive(a, b, expected):
     """Positive tests for multiplication"""
-    assert Operations.multiply(1,1) == 1
-    assert Operations.multiply(1,2) == 2
-    assert Operations.multiply(1,3) == 3
+    assert Operations.multiply(a, b) == expected
 
-# def test_multiplication_negative():
-#     """Negative tests for multiplication"""
-#     assert multiply(1,5) == 6
-#     assert multiply(2,5) == 12
-#     assert multiply(4,4) == 15
+@pytest.mark.parametrize("a, b, expected", [
+    (2,2,1),
+    (3,3,1),
+    (4,2,2),
+])
 
-def test_division_positive():
+def test_division_positive(a, b, expected):
     """Positive tests for division"""
-    assert Operations.divide(1,1) == 1
-    assert Operations.divide(2,1) == 2
-    assert Operations.divide(12,2) == 6
-
-# def test_division_negative():
-#     """Negative tests for division"""
-#     assert divide(3, 2) == 0
-#     assert divide(4,2) == 3
-#     assert divide(2,2) == 2
+    assert Operations.divide(a,b) == expected
 
 def test_add():
     assert Operations.add(1,1) == 2
