@@ -22,29 +22,50 @@ def run_calculator_with_input(monkeypatch, inputs):
 
 # Positive tests
 
-def test_addition(monkeypatch):
-    """Testing addition for calculator"""
-    inputs = ["addition 1 1", "quit"]
-    output = run_calculator_with_input(monkeypatch, inputs)
-    assert "addition result: 2.0" in output
+@pytest.mark.parametrize("commands", [(["help", "quit"]),])
 
-def test_subtraction(monkeypatch):
-    """Testing subtraction for calculator"""
-    inputs = ["subtraction 1 1", "quit"]
-    output = run_calculator_with_input(monkeypatch, inputs)
-    assert "subtraction result: 0.0" in output
+def test_help_command(monkeypatch, commands):
+    """Test the help command prints instructions for using the program."""
+    expected_strings = [
+        "Supported operations:",
+        "addition <num1> <num2>",
+        "subtraction <num1> <num2>",
+        "multiplication <num1> <num2>",
+        "division <num1> <num2>",
+        "Special commands:",
+        "help",
+        "history",
+        "quit",
+    ]
+    output = run_calculator_with_input(monkeypatch, commands)
 
-def test_multiplication(monkeypatch):
-    """Testing multiplication for calculator"""
-    inputs = ["multiplication 1 1", "quit"]
-    output = run_calculator_with_input(monkeypatch, inputs)
-    assert "multiplication result: 1.0" in output
+    for expected in expected_strings:
+        assert expected in output
 
-def test_division(monkeypatch):
-    """Testing division for calculator"""
-    inputs = ["division 1 1", "quit"]
+@pytest.mark.parametrize("commands, expected_entries", [
+    (["addition 1 1","history","quit"], ["addition 1.0 1.0 = 2.0"]),    
+    (["subtraction 5 2","multiplication 3 4","history","quit"], 
+     ["subtraction 5.0 2.0 = 3.0", "multiplication 3.0 4.0 = 12.0"]),    
+])
+
+def test_history_command(monkeypatch, commands, expected_entries):
+    output = run_calculator_with_input(monkeypatch, commands)
+
+    for entry in expected_entries:
+        assert entry in output
+
+@pytest.mark.parametrize("user_input, expected_output", [
+    ("addition 1 1", "addition result: 2.0"),
+    ("subtraction 1 1", "subtraction result: 0.0"),
+    ("multiplication 1 1", "multiplication result: 1.0"),
+    ("division 1 1", "division result: 1.0"),
+])
+def test_operations(monkeypatch, user_input, expected_output):
+    """Testing all basic operations with parameterized inputs"""
+    inputs = [user_input, "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
-    assert "division result: 1.0" in output
+    assert expected_output in output
+
 
 #Negative Results
 
