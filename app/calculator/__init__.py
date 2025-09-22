@@ -29,15 +29,29 @@ def calculator():
 
     while True:
         userinput = input(
-            "Input an operation (addition, subtraction, multiplication, division) and two numbers. Type 'quit' to exit: "
+            "Input an operation (addition, subtraction, multiplication, division) and two numbers. Type 'help' for more details. Type 'quit' to exit: "
         )
 
         if userinput.lower() == "quit":
             print("Quitting program")
             break
         elif userinput.lower() == "help":
-            print("Format: <operation> <num1> <num2> | SUpported operations") # trigger help functions
-
+            print("""
+                  Supported operations:
+                    addition <num1> <num2>    : Adds two numbers
+                    subtraction <num1> <num2>    : Subtracts two numbers
+                    multiplication <num1> <num2>    : Multiplies two numbers
+                    division <num1> <num2>    : Divides first number by second
+                  Special commands:
+                    help    : Shows this help message
+                    history : Show all calculations performed
+                    quit    : Exit the program   
+                  """) # trigger help functions
+        elif userinput.lower() == "history":
+            if not history:
+                print("No calculations have been performed.")
+            for entry in history:
+                print(entry)
         try:
             operation, num1, num2 = userinput.split()
             num1 = float(num1)
@@ -47,6 +61,11 @@ def calculator():
             continue
 
         try:
+            #LBYL
+            if operation == "division" and num2 == 0:
+                print("Division by zero is not allowed!")
+                continue
+            #EAFP
             calc = CalculationFactory.create_calculator(num1, num2, operation)
             result = calc.get_result()
             history.append(f"{operation} {num1} {num2} = {result}")
