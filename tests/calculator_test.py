@@ -65,6 +65,14 @@ def test_help_command(monkeypatch, commands):
     for expected in expected_strings:
         assert expected in output
 
+# test history
+
+def test_empty_history(monkeypatch):
+    """Test that history prints a message if no calculations performed yet."""
+    input = ["history", "quit"]
+    output = run_calculator_with_input(monkeypatch, input)
+    assert "No calculations have been performed." in output
+
 @pytest.mark.parametrize("commands, expected_entries", [
     (["addition 1 1","history","quit"], ["addition 1.0 1.0 = 2.0"]),    
     (["subtraction 5 2","multiplication 3 4","history","quit"], 
