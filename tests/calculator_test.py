@@ -71,7 +71,8 @@ def test_invalid_operation(monkeypatch, user_input):
     """Test invalid input for an  operation"""
     inputs = [user_input, "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
-    assert "Not a valid operation: modulus. Input in the following format: <operation> <number 1> <number 2>" in output
+    operation = user_input.split()[0]
+    assert f"Not a valid operation: {operation}. Input in the following format: <operation> <number 1> <number 2>" in output
 
 def test_divide_by_zero(monkeypatch):
     """Test for invalid divide by zero"""
@@ -83,7 +84,7 @@ def test_divide_by_zero(monkeypatch):
     ("addition 0 5", "addition result: 5.0"),
     ("subtraction -3 7", "subtraction result: -10.0"),
     ("multiplication 2.5 3.5", "multiplication result: 8.75"),
-    ("division 10000000 1000", "division result: 1000.0"),
+    ("division 10000000 1000", "division result: 10000.0"),
 ])
 
 def test_edge_cases(monkeypatch, user_input, expected_output):
