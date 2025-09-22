@@ -3,11 +3,12 @@ name: Run Tests on Push or Pull Request to Main
 on:
   push:
     branches:
-      - main  # Run tests on any push to the main branch
+      - main  # Run tests on any push to the main branch AND MASTER branch
+      - master
   pull_request:
     branches:
-      - main  # Run tests on any pull request to the main branch
-
+      - main  # Run tests on any pull request to the main branch AND MASTER branch
+      - master
 jobs:
   test:
     runs-on: ubuntu-latest
