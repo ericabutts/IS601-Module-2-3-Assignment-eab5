@@ -91,3 +91,4 @@ def test_edge_cases(monkeypatch, user_input, expected_output):
     inputs = [user_input, "quit"]
     output = run_calculator_with_input(monkeypatch, inputs)
     assert expected_output in output
+    
