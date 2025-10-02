@@ -52,6 +52,7 @@ def calculator():
                 print("No calculations have been performed.")
             for entry in history:
                 print(entry)
+            continue
         try:
             operation, num1, num2 = userinput.split()
             num1 = float(num1)
@@ -73,3 +74,6 @@ def calculator():
 
         except ValueError as e:
             print(e)
+
+if __name__ == "__main__":
+    calculator()

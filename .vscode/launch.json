@@ -3,10 +3,10 @@
     "configurations": [
         {
             "name": "Python: Debug Calculator Module",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
-            "module": "app.calculator",   // points to your package
-            "cwd": "${workspaceFolder}",  // project root
+            "module": "app.calculator.__init__",   // run the __init__.py as a module
+            "cwd": "${workspaceFolder}",          // project root
             "console": "integratedTerminal",
             "justMyCode": true
         }
