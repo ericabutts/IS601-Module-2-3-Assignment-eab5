@@ -23,3 +23,6 @@ A simple command-line calculator with Read-Eval-Print Loop (REPL) for continuous
 ```bash
 git clone <your-repo-url>
 cd <your-repo-folder>
+
+python -m venv .venv
+python -m main

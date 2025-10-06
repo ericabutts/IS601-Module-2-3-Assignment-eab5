@@ -1,6 +1,6 @@
 
-from app.calculator import calculator
+from app.calculator_repl import calculator_repl
 
 #name runs program directly
 if __name__ == "__main__":
-    calculator()
+    calculator_repl()
