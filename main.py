@@ -1,9 +1,9 @@
 """
 Advanced Object-Oriented Programming: Complete Calculator Implementation
-====================================================================
 
-A comprehensive educational example demonstrating OOP principles, design patterns,
-and Python best practices through a calculator implementation.
+Erica Butts
+October 6, 2025
+IS 601
 
 Key Features:
 ------------
@@ -16,7 +16,6 @@ Key Features:
 7. Documentation: Educational comments
 8. Type Hints: Static type checking support
 
-Version: 1.0
 """
 
 
